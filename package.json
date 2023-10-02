@@ -1,0 +1,27 @@
+{
+  "name": "base-64-cli",
+  "version": "1.0.0",
+  "description": "A CLI for base-64 package",
+  "main": "index.js",
+  "bin": {
+    "b64": "./index.js"
+  },
+  "scripts": {
+    "start": "tsc ./index.ts && node ./index.js",
+    "test": "ts-node index.js"
+  },
+  "author": "tsgrissom",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/base-64": "^1.0.0",
+    "@types/node": "^20.8.0",
+    "@types/prompt-sync": "^4.2.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "chalk": "^5.3.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
