@@ -11,6 +11,18 @@
       "input": "Hello world",
       "operation": "encode",
       "result": "SGVsbG8gd29ybGQ="
+    },
+    {
+      "at": 1697740952709,
+      "input": "Hello world",
+      "operation": "encode",
+      "result": "SGVsbG8gd29ybGQ="
+    },
+    {
+      "at": 1697741085737,
+      "input": "Hello world",
+      "operation": "encode",
+      "result": "SGVsbG8gd29ybGQ="
     }
   ]
 }
