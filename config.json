@@ -1,3 +1,4 @@
 {
-  "saveToClipboard": true
+  "saveToClipboard": true,
+  "encodeWhitespace": false
 }

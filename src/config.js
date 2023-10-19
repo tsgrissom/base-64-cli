@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+
 const CONFIG_PATH = new URL('../config.json', import.meta.url).pathname;
 
 export const getConfig = async () => {
@@ -11,11 +12,20 @@ export const saveConfig = async (conf) => {
     return conf;
 }
 
-export const shouldSaveToClipboard = async () => {
-    const b = await getConfig().saveToClipboard;
+export const shouldEncodeWhitespace = async () => {
+    const { encodeWhitespace } = await getConfig();
 
-    if (b === undefined)
+    if (encodeWhitespace === undefined)
         return true;
 
-    return b;
+    return encodeWhitespace;
+}
+
+export const shouldSaveToClipboard = async () => {
+    const { saveToClipboard } = await getConfig();
+
+    if (saveToClipboard === undefined)
+        return true;
+
+    return saveToClipboard;
 }
