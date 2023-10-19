@@ -10,6 +10,7 @@ import {decodeInput, encodeInput} from "./helpers.js";
 import {createHistoryRecord, getHistory, insertHistory, saveHistory} from "./history.js";
 
 const clog = console.log
+const lPad = (s, spaces) => s.padStart(spaces, ' ')
 
 export const doCopyIfShould = async result => {
     const should = await shouldSaveToClipboard();
@@ -84,16 +85,31 @@ export const handleHistoryCommand = async argv => {
     if (history === undefined || history.length === 0) {
         clog('History: ' + chalk.red('None'));
         return;
+    } else {
+        clog('  base-64-cli History: ');
     }
 
-    history.map(entry => {
-        const at = entry.at;
+    for (let i=0; i<history.length; i++) {
+        const entry = history[i];
+        const { at, input, operation, result } = entry
         const date = dayjs(at).format('MMM D[th], YYYY [at] h:mm A');
+        const dateFmt =  `     ${date}`;
+        const inputFmt = `  "${input}"`;
+        const opFmt = `${operation}d`
+        const resultFmt= ` "${result}"`;
 
-        clog("* " + chalk.yellow('At') + `:      ${date}`);
-        clog('  ' + chalk.yellow('Input') + `:  "${entry.input} "` + chalk.blue(` ${entry.operation}d \u2193`));
-        clog('  ' + chalk.yellow('Result') + `: "${entry.result}"`);
-    })
+
+        if (i===0)
+            clog(' ------');
+
+        clog('| ' + chalk.yellow('At') + ':' + dateFmt);
+        clog('| ' + chalk.yellow('Input') + ':' + inputFmt);
+        clog('| ' + chalk.blue(`\u2193 ${opFmt}`));
+        clog('| ' + chalk.yellow('Result') + ':' + resultFmt);
+
+        if ((i-1) !== history.length)
+            clog(' ------');
+    }
 };
 
 export const handleToggleCopyCommand = async _ => {

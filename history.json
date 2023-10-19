@@ -1,13 +1,19 @@
 {
   "history": [
     {
-      "at": 1697750793147,
+      "at": 1697756371303,
       "input": "Hey queen",
       "operation": "Encode",
       "result": "SGV5IHF1ZWVu"
     },
     {
-      "at": 1697754454184,
+      "at": 1697756375199,
+      "input": "Jake Holtman",
+      "operation": "Encode",
+      "result": "SmFrZSBIb2x0bWFu"
+    },
+    {
+      "at": 1697756450248,
       "input": "Jake Holtman",
       "operation": "Encode",
       "result": "SmFrZSBIb2x0bWFu"
