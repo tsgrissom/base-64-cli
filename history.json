@@ -1,11 +1,16 @@
 {
   "history": [
     {
-      "id": 1,
-      "createdAt": 1,
-      "input": "pp",
-      "operation": "encode",
-      "result": "something"
+      "createdAt": 1697728421229,
+      "input": "Hello",
+      "operation": "decode",
+      "result": "SGVsbG8="
+    },
+    {
+      "createdAt": 1697728430768,
+      "input": "SGVsbG8=",
+      "operation": "decode",
+      "result": "Hello"
     }
   ]
 }

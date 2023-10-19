@@ -1,19 +1,20 @@
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs'
 
-import * as helpers from './helpers.cjs'
+import * as helpers from './helpers.js'
+import { insertHistory } from './history.js'
 
-const decodeCommandArguments = () : yargs.Argv => yargs.positional('input', {
+const decodeCommandArguments = () => yargs.positional('input', {
     type: 'string',
     description: 'An base64 encoded string to be decoded'
 })
 
-const encodeCommandArguments = () : yargs.Argv => yargs.positional('input', {
+const encodeCommandArguments = () => yargs.positional('input', {
     type: 'string',
     description: 'An unencoded string to be encoded'
 })
 
-const handleDecodeCommand = (argv: yargs.ArgumentsCamelCase) => {
+const handleDecodeCommand = argv => {
     const result = helpers.decodeInput(argv.input)
 
     if (result === undefined) {
@@ -21,10 +22,18 @@ const handleDecodeCommand = (argv: yargs.ArgumentsCamelCase) => {
         return
     }
 
-    console.log(`Decoded: ${result}`)
+    const entry = {
+        "createdAt": Date.now(),
+        "input": argv.input,
+        "operation": "decode",
+        "result": result
+    }
+
+    insertHistory(entry)
+        .then(() => console.log(`Decoded: ${result}`))
 }
 
-const handleEncodeCommand = (argv: yargs.ArgumentsCamelCase) => {
+const handleEncodeCommand = argv => {
     const result = helpers.encodeInput(argv.input)
 
     if (result === undefined) {
@@ -32,10 +41,18 @@ const handleEncodeCommand = (argv: yargs.ArgumentsCamelCase) => {
         return
     }
 
-    console.log(`Encoded: ${result}`)
+    const entry = {
+        "createdAt": Date.now(),
+        "input": argv.input,
+        "operation": "decode",
+        "result": result
+    }
+
+    insertHistory(entry)
+        .then(() => console.log(`Encoded: ${result}`))
 }
 
-const handleHistoryCommand = (argv: yargs.ArgumentsCamelCase) => {
+const handleHistoryCommand = argv => {
     console.log('Print history') // TODO
 }
 

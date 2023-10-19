@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A CLI for base-64 package",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "b64": "./index.js"
   },
