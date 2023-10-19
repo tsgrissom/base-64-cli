@@ -1,23 +1,8 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs';
 
-import { handleDecodeCommand, handleEncodeCommand } from './command-delegates.js'
-import { handleHistoryCommand, handleToggleCopyCommand } from './command-delegates.js'
-
-// export const decodeYargs = () => yargs.positional('input', {
-//     type: 'string',
-//     description: 'An base64 encoded string to be decoded'
-// });
-
-const decodeYargs = {
-    type: 'string',
-    describe: 'A base64 encoded string to be decoded'
-}
-
-export const encodeYargs = () => yargs.positional('input', {
-    type: 'string',
-    description: 'An unencoded string to be encoded'
-});
+import { handleDecodeCommand, handleEncodeCommand } from './command-delegates.js';
+import { handleHistoryCommand, handleToggleCopyCommand } from './command-delegates.js';
 
 yargs(hideBin(process.argv))
     .command({

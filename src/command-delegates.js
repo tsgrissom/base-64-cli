@@ -2,7 +2,6 @@
 import chalk from "chalk";
 import * as clipboard from "copy-paste";
 import isBase64 from "is-base64";
-import yargs from "yargs";
 
 // Project Imports
 import {getConfig, saveConfig, shouldEncodeWhitespace, shouldSaveToClipboard} from "./config.js";
@@ -15,7 +14,7 @@ export const doCopyIfShould = async result => {
     const should = await shouldSaveToClipboard();
     if (should) {
         clipboard.copy(result);
-        clog(chalk.yellow('Copied to system clipboard'))
+        clog(chalk.yellow('Copied to system clipboard'));
     }
 }
 
@@ -25,7 +24,7 @@ export const handleDecodeCommand = async argv => {
 
     if (inp.trim() === '' && !encodeWhitespace) {
         clog(chalk.red('Unable to decode empty string!'));
-        clog(chalk.red('Set "encodeWhitespace" to true in config.json if you want to encode whitespace'))
+        clog(chalk.red('Set "encodeWhitespace" to true in config.json if you want to encode whitespace'));
         return;
     }
 
