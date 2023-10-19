@@ -24,7 +24,7 @@ yargs(hideBin(process.argv))
         builder: {
             input: {
                 type: 'string',
-                describe: 'An unencoded string to be encoded'
+                describe: 'A string to be encoded'
             }
         },
         handler: argv => handleEncodeCommand(argv)
@@ -33,7 +33,15 @@ yargs(hideBin(process.argv))
         command: 'history',
         aliases: ['hist', 'h'],
         describe: 'View the history of base-64-cli',
-        handler: _ => handleHistoryCommand()
+        builder: {
+            clear: {
+                alias: 'C',
+                describe: 'Clear b64-cli history log',
+                type: 'boolean',
+                default: false
+            }
+        },
+        handler: argv => handleHistoryCommand(argv)
     })
     .command({
         command: 'copy',

@@ -12,7 +12,7 @@ export const saveHistory = async history => {
 };
 
 export const createHistoryRecord = (input, isEncode, result) => {
-    const operation = isEncode ? 'encode' : 'decode';
+    const operation = isEncode ? 'Encode' : 'Decode';
 
     return {
         "at": Date.now(),

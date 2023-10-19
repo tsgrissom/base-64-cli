@@ -6,7 +6,7 @@ import isBase64 from "is-base64";
 // Project Imports
 import {getConfig, saveConfig, shouldEncodeWhitespace, shouldSaveToClipboard} from "./config.js";
 import {decodeInput, encodeInput} from "./helpers.js";
-import {createHistoryRecord, insertHistory} from "./history.js";
+import {createHistoryRecord, getHistory, insertHistory, saveHistory} from "./history.js";
 
 const clog = console.log
 
@@ -70,8 +70,26 @@ export const handleEncodeCommand = argv => {
         });
 };
 
-export const handleHistoryCommand = _ => {
-    clog('Print history'); // TODO Print history in palatable manner
+export const handleHistoryCommand = async argv => {
+    if (argv.clear) {
+        saveHistory({history: []})
+            .then(() => clog('b64-cli history has been cleared'))
+            .catch(() => clog(chalk.red('Something went wrong while clearing the history')));
+        return;
+    }
+
+    const { history } = await getHistory();
+
+    if (history === undefined || history.length === 0) {
+        clog('History: ' + chalk.red('None'));
+        return;
+    }
+
+    history.map(entry => {
+        clog("* " + chalk.yellow('Input') + `:  "${entry.input}"`);
+        clog(chalk.blue(`   ${entry.operation}d \u2193`));
+        clog('  ' + chalk.yellow('Result') + `: "${entry.result}"`);
+    })
 };
 
 export const handleToggleCopyCommand = async _ => {
