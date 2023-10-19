@@ -1,6 +1,7 @@
 // Package Imports
 import chalk from "chalk";
 import * as clipboard from "copy-paste";
+import dayjs from "dayjs";
 import isBase64 from "is-base64";
 
 // Project Imports
@@ -86,8 +87,11 @@ export const handleHistoryCommand = async argv => {
     }
 
     history.map(entry => {
-        clog("* " + chalk.yellow('Input') + `:  "${entry.input}"`);
-        clog(chalk.blue(`   ${entry.operation}d \u2193`));
+        const at = entry.at;
+        const date = dayjs(at).format('MMM D[th], YYYY [at] h:mm A');
+
+        clog("* " + chalk.yellow('At') + `:      ${date}`);
+        clog('  ' + chalk.yellow('Input') + `:  "${entry.input} "` + chalk.blue(` ${entry.operation}d \u2193`));
         clog('  ' + chalk.yellow('Result') + `: "${entry.result}"`);
     })
 };
