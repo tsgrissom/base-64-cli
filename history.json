@@ -1,0 +1,11 @@
+{
+  "history": [
+    {
+      "id": 1,
+      "createdAt": 1,
+      "input": "pp",
+      "operation": "encode",
+      "result": "something"
+    }
+  ]
+}
