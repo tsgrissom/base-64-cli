@@ -1,76 +1,67 @@
-import { hideBin } from 'yargs/helpers'
-import yargs from 'yargs'
+import chalk from "chalk";
+import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs';
 
-import * as helpers from './helpers.js'
-import { insertHistory } from './history.js'
+import { decodeInput, encodeInput } from './helpers.js';
+import { createHistoryRecord, insertHistory } from './history.js';
 
 const decodeCommandArguments = () => yargs.positional('input', {
     type: 'string',
     description: 'An base64 encoded string to be decoded'
-})
+});
 
 const encodeCommandArguments = () => yargs.positional('input', {
     type: 'string',
     description: 'An unencoded string to be encoded'
-})
+});
 
 const handleDecodeCommand = argv => {
-    const result = helpers.decodeInput(argv.input)
+    const result = decodeInput(argv.input);
 
     if (result === undefined) {
-        console.log('Undefined decoded string')
-        return
+        console.log(chalk.red('Undefined decoded string'));
+        return;
     }
 
-    const entry = {
-        "createdAt": Date.now(),
-        "input": argv.input,
-        "operation": "decode",
-        "result": result
-    }
+    const entry = createHistoryRecord(argv.input, false, result);
 
     insertHistory(entry)
-        .then(() => console.log(`Decoded: ${result}`))
-}
+        .then(() => console.log(chalk.blue(`Decoded: ${result}`)));
+};
 
 const handleEncodeCommand = argv => {
-    const result = helpers.encodeInput(argv.input)
+    const result = encodeInput(argv.input);
 
     if (result === undefined) {
-        console.log('Undefined encoded string')
-        return
+        console.log(chalk.red('Undefined encoded string'));
+        return;
     }
 
-    const entry = {
-        "createdAt": Date.now(),
-        "input": argv.input,
-        "operation": "decode",
-        "result": result
-    }
+    const entry = createHistoryRecord(argv.input, true, result);
 
     insertHistory(entry)
-        .then(() => console.log(`Encoded: ${result}`))
-}
+        .then(() => console.log(chalk.blue(`Encoded: ${result}`)));
+};
 
-const handleHistoryCommand = argv => {
-    console.log('Print history') // TODO
-}
+const handleHistoryCommand = _ => {
+    console.log('Print history'); // TODO
+};
 
 yargs(hideBin(process.argv))
     .command(
         'decode <input>',
         'Decode a base64 hash',
-        _ => decodeCommandArguments,
+        _    => decodeCommandArguments,
         argv => handleDecodeCommand(argv))
     .command(
         'encode <input>',
         'Encode an unencoded string into base64',
-        _ => encodeCommandArguments,
+        _    => encodeCommandArguments,
         argv => handleEncodeCommand(argv))
     .command(
         'history',
         'View the history of base-64-cli',
-        () => {},
+        _    => {},
         argv => handleHistoryCommand(argv))
     .demandCommand(1)
-    .parse()
+    .parse();

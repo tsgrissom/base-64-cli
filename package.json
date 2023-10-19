@@ -1,7 +1,7 @@
 {
   "name": "base-64-cli",
   "version": "1.0.0",
-  "description": "A CLI for base-64 package",
+  "description": "A CLI for the base-64 package",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -15,6 +15,7 @@
   "author": "tsgrissom",
   "license": "ISC",
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/base-64": "^1.0.0",
     "@types/node": "^20.8.0",
     "@types/prompt-sync": "^4.2.1",

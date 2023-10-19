@@ -1,16 +1,16 @@
 {
   "history": [
     {
-      "createdAt": 1697728421229,
-      "input": "Hello",
-      "operation": "decode",
-      "result": "SGVsbG8="
+      "at": 1697729064014,
+      "input": "Hello world",
+      "operation": "encode",
+      "result": "SGVsbG8gd29ybGQ="
     },
     {
-      "createdAt": 1697728430768,
-      "input": "SGVsbG8=",
-      "operation": "decode",
-      "result": "Hello"
+      "at": 1697729370991,
+      "input": "Hello world",
+      "operation": "encode",
+      "result": "SGVsbG8gd29ybGQ="
     }
   ]
 }

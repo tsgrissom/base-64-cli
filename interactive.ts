@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { decode, encode } from 'base-64';
-import * as promptSync from 'prompt-sync';
-const prompt = promptSync({sigint: true});
+import * as ps from 'prompt-sync';
+const prompt = ps({sigint: true});
 
 const args: string[] = process.argv;
 const log = console.log;
