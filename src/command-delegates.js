@@ -1,16 +1,15 @@
 // Package Imports
-import chalk from "chalk";
-import * as clipboard from "copy-paste";
-import dayjs from "dayjs";
-import isBase64 from "is-base64";
+import chalk from 'chalk';
+import * as clipboard from 'copy-paste';
+import dayjs from 'dayjs';
+import isBase64 from 'is-base64';
 
 // Project Imports
-import {getConfig, saveConfig, shouldEncodeWhitespace, shouldSaveToClipboard} from "./config.js";
-import {decodeInput, encodeInput} from "./helpers.js";
-import {createHistoryRecord, getHistory, insertHistory, saveHistory} from "./history.js";
+import {getConfig, saveConfig, shouldEncodeWhitespace, shouldSaveToClipboard} from './config.js';
+import {decodeInput, encodeInput} from './helpers.js';
+import {createHistoryRecord, getHistory, insertHistory, saveHistory} from './history.js';
 
 const clog = console.log
-const lPad = (s, spaces) => s.padStart(spaces, ' ')
 
 export const doCopyIfShould = async result => {
     const should = await shouldSaveToClipboard();
@@ -30,17 +29,13 @@ export const handleDecodeCommand = async argv => {
         return;
     }
 
-    if (!isBase64(inp)) {
-        clog(chalk.red(`Unable to decode non-base64 "${inp}"`));
-        return;
-    }
+    if (!isBase64(inp))
+        return clog(chalk.red(`Unable to decode non-base64 "${inp}"`));
 
     const result = decodeInput(inp);
 
-    if (result === undefined) {
-        clog(chalk.red('Result of decoding string was undefined!'));
-        return;
-    }
+    if (result === undefined)
+        return clog(chalk.red('Result of decoding string was undefined!'));
 
     const entry = createHistoryRecord(argv.input, false, result);
     insertHistory(entry)
@@ -56,10 +51,8 @@ export const handleDecodeCommand = async argv => {
 export const handleEncodeCommand = argv => {
     const result = encodeInput(argv.input);
 
-    if (result === undefined) {
-        clog(chalk.red('Result of decoding string was undefined!'));
-        return;
-    }
+    if (result === undefined)
+        return clog(chalk.red('Result of decoding string was undefined!'));
 
     const entry = createHistoryRecord(argv.input, true, result);
     insertHistory(entry)
@@ -73,6 +66,8 @@ export const handleEncodeCommand = argv => {
 };
 
 export const handleHistoryCommand = async argv => {
+    const line = (s) => clog(`| ` + s);
+
     if (argv.clear) {
         saveHistory({history: []})
             .then(() => clog('b64-cli history has been cleared'))
@@ -83,8 +78,7 @@ export const handleHistoryCommand = async argv => {
     const { history } = await getHistory();
 
     if (history === undefined || history.length === 0) {
-        clog('History: ' + chalk.red('None'));
-        return;
+        return clog('History: ' + chalk.red('None'));
     } else {
         clog('  base-64-cli History: ');
     }
@@ -98,16 +92,15 @@ export const handleHistoryCommand = async argv => {
         const opFmt = `${operation}d`
         const resultFmt= ` "${result}"`;
 
-
-        if (i===0)
+        if (i===0) // first iteration
             clog(' ------');
 
-        clog('| ' + chalk.yellow('At') + ':' + dateFmt);
-        clog('| ' + chalk.yellow('Input') + ':' + inputFmt);
-        clog('| ' + chalk.blue(`\u2193 ${opFmt}`));
-        clog('| ' + chalk.yellow('Result') + ':' + resultFmt);
+        line(chalk.yellow('At') + ':' + dateFmt);
+        line(chalk.yellow('Input') + ':' + inputFmt);
+        line(chalk.blue(`\u2193 ${opFmt}`));
+        line(chalk.yellow('Result') + ':' + resultFmt);
 
-        if ((i-1) !== history.length)
+        if ((i-1) !== history.length) // last iteration
             clog(' ------');
     }
 };
