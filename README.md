@@ -1,12 +1,9 @@
 # base-64-cli
-Written in TypeScript
+A CLI for decoding and encoding base-64 hashes
+Written in pure JavaScript
 
-To compile, do the following:
-```
-npm install
-tsc interactive.ts
-```
-Run the resulting `interactive.js`, or run the following to link the binary files to your command line:
-```
-npm link
-```
+## Compilation
+Run the following:
+1. `npm install`
+2. `npm link`
+3. `b64` should now work
