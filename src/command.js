@@ -1,7 +1,7 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs';
 
-import { handleDecodeCommand, handleEncodeCommand } from './command-delegates.js';
+import {handleDecodeCommand, handleEncodeCommand, handleToggleColorCommand} from './command-delegates.js';
 import { handleHistoryCommand, handleToggleCopyCommand } from './command-delegates.js';
 
 yargs(hideBin(process.argv))
@@ -47,6 +47,11 @@ yargs(hideBin(process.argv))
         command: 'copy',
         describe: 'Toggles auto-copying to clipboard',
         handler: _ => handleToggleCopyCommand()
+    })
+    .command({
+        command: 'color',
+        describe: 'Toggle use of color in prints',
+        handler: _ => handleToggleColorCommand()
     })
     .demandCommand(1)
     .parse();

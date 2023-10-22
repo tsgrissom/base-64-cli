@@ -1,4 +1,5 @@
 {
-  "saveToClipboard": true,
-  "encodeWhitespace": false
+  "encodeWhitespace": false,
+  "saveToClipboard": false,
+  "useColor": false
 }

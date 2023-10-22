@@ -29,3 +29,12 @@ export const shouldSaveToClipboard = async () => {
 
     return saveToClipboard;
 }
+
+export const shouldUseColor = async () => {
+    const { useColor } = await getConfig();
+
+    if (useColor === undefined)
+        return true;
+
+    return useColor;
+}
