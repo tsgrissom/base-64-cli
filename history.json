@@ -1,16 +1,3 @@
 {
-  "history": [
-    {
-      "at": 1698003298801,
-      "input": "Jake Holtman",
-      "operation": "Encode",
-      "result": "SmFrZSBIb2x0bWFu"
-    },
-    {
-      "at": 1698003958233,
-      "input": "JAH",
-      "operation": "Encode",
-      "result": "SkFI"
-    }
-  ]
+  "history": []
 }
