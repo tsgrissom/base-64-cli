@@ -1,8 +1,8 @@
-import { hideBin } from 'yargs/helpers';
+import {hideBin} from 'yargs/helpers';
 import yargs from 'yargs';
 
 import {handleDecodeCommand, handleEncodeCommand, handleToggleColorCommand} from './command-delegates.js';
-import { handleHistoryCommand, handleToggleCopyCommand } from './command-delegates.js';
+import {handleHistoryCommand, handleToggleCopyCommand} from './command-delegates.js';
 
 yargs(hideBin(process.argv))
     .command({

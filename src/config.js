@@ -5,12 +5,12 @@ const CONFIG_PATH = new URL('../config.json', import.meta.url).pathname;
 export const getConfig = async () => {
     const conf = await (fs.readFile(CONFIG_PATH, 'utf-8'));
     return JSON.parse(conf);
-}
+};
 
 export const saveConfig = async (conf) => {
     await fs.writeFile(CONFIG_PATH, JSON.stringify(conf, null, 2));
     return conf;
-}
+};
 
 export const shouldEncodeWhitespace = async () => {
     const { encodeWhitespace } = await getConfig();
@@ -19,7 +19,7 @@ export const shouldEncodeWhitespace = async () => {
         return true;
 
     return encodeWhitespace;
-}
+};
 
 export const shouldSaveToClipboard = async () => {
     const { saveToClipboard } = await getConfig();
@@ -28,7 +28,7 @@ export const shouldSaveToClipboard = async () => {
         return true;
 
     return saveToClipboard;
-}
+};
 
 export const shouldUseColor = async () => {
     const { useColor } = await getConfig();
@@ -37,4 +37,4 @@ export const shouldUseColor = async () => {
         return true;
 
     return useColor;
-}
+};

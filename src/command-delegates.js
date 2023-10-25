@@ -9,7 +9,7 @@ import {getConfig, saveConfig, shouldEncodeWhitespace, shouldSaveToClipboard, sh
 import {decodeInput, encodeInput} from './helpers.js';
 import {createHistoryRecord, getHistory, insertHistory, saveHistory} from './history.js';
 
-const clog = console.log
+const clog = console.log;
 
 export const doCopyIfShould = async result => {
     const shouldCopy = await shouldSaveToClipboard();
@@ -19,7 +19,7 @@ export const doCopyIfShould = async result => {
         clipboard.copy(result);
         clog(withColor ? chalk.yellow(txtClip) : txtClip);
     }
-}
+};
 
 export const handleDecodeCommand = async argv => {
     const inp = argv.input;
@@ -51,7 +51,7 @@ export const handleDecodeCommand = async argv => {
         .then(() => {
             const blob = 'Decoded: ';
             let txt = withColor ? chalk.blue(blob) : blob;
-            txt += `"${result}"`
+            txt += `"${result}"`;
             clog(txt);
             return doCopyIfShould(result);
         })
@@ -109,7 +109,7 @@ export const handleHistoryCommand = async argv => {
 
     for (let i=0; i<history.length; i++) {
         const entry = history[i];
-        const { at, input, operation, result } = entry
+        const { at, input, operation, result } = entry;
         const date = dayjs(at).format('MMM D[th], YYYY [at] h:mm A');
         const dateFmt =  `     ${date}`;
         const inputFmt = `  "${input}"`;
@@ -152,7 +152,7 @@ export const handleToggleCopyCommand = async _ => {
 
 export const handleToggleColorCommand = async _ => {
     const conf = await getConfig();
-    const inverse = !await shouldUseColor()
+    const inverse = !await shouldUseColor();
     const verbiage = inverse ? 'will now use' : 'will no longer use';
 
     conf.useColor = inverse;
